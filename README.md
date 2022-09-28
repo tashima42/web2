@@ -10,3 +10,8 @@
 npm install
 npm run dev
 ```
+
+### Rodando testes
+```
+npm run test
+```

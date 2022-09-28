@@ -1,8 +1,8 @@
-import { buildCryptoHelper } from "./crypto";
-import { buildJwtHelper } from "./jwt";
+import { buildCryptoHelper } from "./crypto.js";
+import { buildJwtHelper } from "./jwt.js";
 
 const cryptoHelper = buildCryptoHelper()
-const jwtHelper = buildJwtHelper()
+const jwtHelper = buildJwtHelper("secret")
 
 export {
   cryptoHelper,

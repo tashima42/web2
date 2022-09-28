@@ -1,7 +1,9 @@
 export function buildContentRepository({ Content }) {
   return Object.freeze({
     insert,
-    filter
+    filter,
+    addComment,
+    addLike,
   })
 
   async function insert({ name, description, ingredients, price, image, user }) {
@@ -18,5 +20,14 @@ export function buildContentRepository({ Content }) {
     }
     const found = await Content.find(query)
     return found ? found : null
+  }
+
+  async function addComment({ comment, id }) {
+    const updated = await Content.updateOne({ _id: id }, { $push: { comments: comment } })
+    return updated
+  }
+  async function addLike({ id }) {
+    const updated = await Content.updateOne({ _id: id }, { $inc: { likes: 1 } })
+    return updated
   }
 }

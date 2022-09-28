@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"user1@example.com\",\n    \"password\": \"secret1\"\n}",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"secret1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,10 +24,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/auth/login",
+							"raw": "http://localhost:3895/auth/login",
+							"protocol": "http",
 							"host": [
-								"{{baseUrl}}"
+								"localhost"
 							],
+							"port": "3895",
 							"path": [
 								"auth",
 								"login"
@@ -50,10 +52,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/auth/login",
+									"raw": "http://localhost:3895/auth/login",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"auth",
 										"login"
@@ -99,6 +103,77 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"success\": false,\n    \"error\": {\n        \"code\": \"LOGIN-INVALID-EMAIL\",\n        \"message\": \"Invalid email\"\n    }\n}"
+						},
+						{
+							"name": "Login with admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"secret1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3895/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3895",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXIiOnsiX2lkIjoiNjMzM2NhZDk5MTgwMTIzZTY3MTA0NGQ1IiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDVEMFlYaktGR1NacS9TeFNiL3lnYS5ZZkkxZTR2MG0uLjdWOEdWY1ovcjB0Q0JYdXpTWGpLIiwicm9sZSI6ImFkbWluIiwibmFtZSI6IkFkbWluIiwiY3JlYXRlZEF0IjoiMjAyMi0wOS0yOFQwNDoxNzoyOS4wNzdaIiwidXBkYXRlZEF0IjoiMjAyMi0wOS0yOFQwNDoxNzoyOS4wNzdaIiwiX192IjowfX0sImlhdCI6MTY2NDMzODY5MCwiZXhwIjoxNjY0NDI1MDkwfQ.9C4B2Hy0qketK3s8jIqFDFcz64ymrX1Cyp0AcOxiMpw; Path=/; Expires=Wed, 28 Sep 2022 04:19:36 GMT; HttpOnly"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "772"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"304-s3bDjGSX0MZ+advAnXUsC2b6BjM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Sep 2022 04:18:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"user\": {\n        \"_id\": \"6333cad99180123e671044d5\",\n        \"email\": \"admin@example.com\",\n        \"password\": \"$2b$10$5D0YXjKFGSZq/SxSb/yga.YfI1e4v0m..7V8GVcZ/r0tCBXuzSXjK\",\n        \"role\": \"admin\",\n        \"name\": \"Admin\",\n        \"createdAt\": \"2022-09-28T04:17:29.077Z\",\n        \"updatedAt\": \"2022-09-28T04:17:29.077Z\",\n        \"__v\": 0\n    },\n    \"jwt\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXIiOnsiX2lkIjoiNjMzM2NhZDk5MTgwMTIzZTY3MTA0NGQ1IiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDVEMFlYaktGR1NacS9TeFNiL3lnYS5ZZkkxZTR2MG0uLjdWOEdWY1ovcjB0Q0JYdXpTWGpLIiwicm9sZSI6ImFkbWluIiwibmFtZSI6IkFkbWluIiwiY3JlYXRlZEF0IjoiMjAyMi0wOS0yOFQwNDoxNzoyOS4wNzdaIiwidXBkYXRlZEF0IjoiMjAyMi0wOS0yOFQwNDoxNzoyOS4wNzdaIiwiX192IjowfX0sImlhdCI6MTY2NDMzODY5MCwiZXhwIjoxNjY0NDI1MDkwfQ.9C4B2Hy0qketK3s8jIqFDFcz64ymrX1Cyp0AcOxiMpw\"\n}"
 						}
 					]
 				}
@@ -125,10 +200,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/admin/user",
+									"raw": "http://localhost:3895/admin/user",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"admin",
 										"user"
@@ -151,10 +228,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/admin/user",
+											"raw": "http://localhost:3895/admin/user",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user"
@@ -216,10 +295,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/admin/user",
+											"raw": "http://localhost:3895/admin/user",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user"
@@ -283,10 +364,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/admin/user",
+									"raw": "http://localhost:3895/admin/user",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"admin",
 										"user"
@@ -309,10 +392,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/admin/user",
+											"raw": "http://localhost:3895/admin/user",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user"
@@ -367,10 +452,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/admin/user/:id",
+									"raw": "http://localhost:3895/admin/user/:id",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"admin",
 										"user",
@@ -391,10 +478,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/admin/user/:id",
+											"raw": "http://localhost:3895/admin/user/:id",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user",
@@ -454,10 +543,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/admin/user/:id",
+											"raw": "http://localhost:3895/admin/user/:id",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user",
@@ -519,10 +610,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/admin/user",
+									"raw": "http://localhost:3895/admin/user",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"admin",
 										"user"
@@ -536,10 +629,12 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/admin/user",
+											"raw": "http://localhost:3895/admin/user",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user"
@@ -594,10 +689,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/admin/user/:id",
+									"raw": "http://localhost:3895/admin/user/:id",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"admin",
 										"user",
@@ -618,10 +715,12 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/admin/user/:id",
+											"raw": "http://localhost:3895/admin/user/:id",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user",
@@ -681,10 +780,12 @@
 										"method": "DELETE",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/admin/user/:id",
+											"raw": "http://localhost:3895/admin/user/:id",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"admin",
 												"user",
@@ -782,10 +883,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/user",
+							"raw": "http://localhost:3895/user",
+							"protocol": "http",
 							"host": [
-								"{{baseUrl}}"
+								"localhost"
 							],
+							"port": "3895",
 							"path": [
 								"user"
 							]
@@ -807,10 +910,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/user",
+									"raw": "http://localhost:3895/user",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"user"
 									]
@@ -881,10 +986,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/content/:id/comment",
+									"raw": "http://localhost:3895/content/:id/comment",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"content",
 										":id",
@@ -914,10 +1021,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{baseUrl}}/content/:id/comment",
+											"raw": "http://localhost:3895/content/:id/comment",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"content",
 												":id",
@@ -1007,10 +1116,12 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/content/:id/like",
+									"raw": "http://localhost:3895/content/:id/like",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"content",
 										":id",
@@ -1031,10 +1142,12 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "{{baseUrl}}/content/:id/like",
+											"raw": "http://localhost:3895/content/:id/like",
+											"protocol": "http",
 											"host": [
-												"{{baseUrl}}"
+												"localhost"
 											],
+											"port": "3895",
 											"path": [
 												"content",
 												":id",
@@ -1130,10 +1243,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/content",
+							"raw": "http://localhost:3895/content",
+							"protocol": "http",
 							"host": [
-								"{{baseUrl}}"
+								"localhost"
 							],
+							"port": "3895",
 							"path": [
 								"content"
 							]
@@ -1155,10 +1270,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/content",
+									"raw": "http://localhost:3895/content",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"content"
 									]
@@ -1227,10 +1344,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/content",
+							"raw": "http://localhost:3895/content",
+							"protocol": "http",
 							"host": [
-								"{{baseUrl}}"
+								"localhost"
 							],
+							"port": "3895",
 							"path": [
 								"content"
 							]
@@ -1252,10 +1371,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/content",
+									"raw": "http://localhost:3895/content",
+									"protocol": "http",
 									"host": [
-										"{{baseUrl}}"
+										"localhost"
 									],
+									"port": "3895",
 									"path": [
 										"content"
 									]
@@ -1311,7 +1432,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "{{accessToken}}",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXIiOnsiX2lkIjoiNjMzM2NhZDk5MTgwMTIzZTY3MTA0NGQ1IiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJDVEMFlYaktGR1NacS9TeFNiL3lnYS5ZZkkxZTR2MG0uLjdWOEdWY1ovcjB0Q0JYdXpTWGpLIiwicm9sZSI6ImFkbWluIiwibmFtZSI6IkFkbWluIiwiY3JlYXRlZEF0IjoiMjAyMi0wOS0yOFQwNDoxNzoyOS4wNzdaIiwidXBkYXRlZEF0IjoiMjAyMi0wOS0yOFQwNDoxNzoyOS4wNzdaIiwiX192IjowfX0sImlhdCI6MTY2NDMzODc5NCwiZXhwIjoxNjY2OTMwNzk0fQ.xmPfUFOwLSlwjf4kVwElqM6iZSOft9CHQEG7WkQOAKs",
 				"type": "string"
 			}
 		]

@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser"
 import "dotenv/config"
 import { joiMiddleware } from "./middleware/joi.js"
 import { authenticateMiddlewareAdmin, authenticateMiddlewareAny } from "./middleware/authenticate.js"
+import { stubMiddleware } from "./middleware/stub.js"
 
 import { connectDb } from "./repositories/index.js"
 
@@ -25,6 +26,7 @@ app.use(cors({ origin: "*" }))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
+app.use(stubMiddleware)
 
 app.post("/auth/login",
   joiMiddleware(authLoginSchema, "body"),

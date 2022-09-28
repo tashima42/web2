@@ -17,8 +17,8 @@ export async function authLoginRoute(req, res) {
   }
 
   const jwt = jwtHelper.sign({ user })
-  res.cookie("session", jwt, { httpOnly: true, expires: new Date(Date.now() + (60 * 60 * 24)) })
-  return res.status(200).json({ success: true, user })
+  res.cookie("session", jwt, { httpOnly: true, expires: new Date(Date.now() + (60 * 60 * 24 * 30)) })
+  return res.status(200).json({ success: true, user, jwt })
   } catch (error) {
     console.error(error)  
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error}})

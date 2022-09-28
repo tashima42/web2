@@ -9,7 +9,7 @@ export function buildJwtHelper(secret) {
     return jsonwebtoken.sign(
       { data }, 
       secret,
-      { expiresIn: (60 * 60 * 24)} // 24 hours
+      { expiresIn: (60 * 60 * 24 * 30)}
     )
   }
 

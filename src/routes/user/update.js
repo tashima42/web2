@@ -1,18 +1,23 @@
-import { userRepository } from "../../../repositories/index.js"
-import { cryptoHelper } from "../../../helpers/index.js"
+import { userRepository } from "../../repositories/index.js"
+import { cryptoHelper } from "../../helpers/index.js"
 
-export async function adminUserUpdateRoute(req, res) {
+export async function userUpdateRoute(req, res) {
   try {
-    const { email, password, name, role } = req.body
+    const { email, password, name } = req.body
+    let pwd = undefined
+
+    const { user } = res.locals
 
     const foundUser = await userRepository.findByEmail(email)
     if (!foundUser) {
       return res.status(404).json({ success: false, error: { code: "UPDATE-USER-NOT-FOUND", message: "User not found" } })
     }
 
-    const hashedPassword = await cryptoHelper.hashBcrypt(password)
+    if (password) {
+      pwd = await cryptoHelper.hashBcrypt(password)
+    }
 
-    await userRepository.update({ id: foundUser._id, email, password: hashedPassword, name, role })
+    await userRepository.update({ id: user._id, email, password: pwd, name })
 
     return res.status(200).json({ success: true })
   } catch (error) {

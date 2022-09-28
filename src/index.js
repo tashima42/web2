@@ -22,6 +22,7 @@ import { contentNewRoute } from "./routes/content/new.js"
 import { contentFilterRoute } from "./routes/content/filter.js"
 import { contentCommentNewRoute } from "./routes/content/comment/new.js"
 import { contentLikeNewRoute } from "./routes/content/like/new.js"
+import { userUpdateRoute } from "./routes/user/update.js"
 /*
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,6 +49,7 @@ app.post("/content/", (req, res, next) => authenticateMiddleware(req, res, next,
 app.get("/content", contentFilterRoute)
 app.post("/content/:id/comment", contentCommentNewRoute)
 app.post("/content/:id/like", contentLikeNewRoute)
+app.put("/user/", (req, res, next) => authenticateMiddleware(req, res, next, false), userUpdateRoute)
 
 const user = process.env.DB_USER
 const pass = process.env.DB_USER_PWD

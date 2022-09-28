@@ -12,8 +12,13 @@ export function buildUserRepository({ User }) {
     const insertedUser = await User.create({ email, password, name, role })
     return insertedUser
   }
-  async function update({ email, password, name, role }) {
-    const updated = await User.updateOne({ email, password, name, role })
+  async function update({ id, email, password, name, role }) {
+    const query = { }
+    if(email) query.email = email
+    if(password) query.password = password
+    if(name) query.name = name
+    if(role) query.role = role
+    const updated = await User.updateOne({_id: id},query)
     return updated
   }
   async function findByEmail(email) {

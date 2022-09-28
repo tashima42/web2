@@ -18,6 +18,7 @@ import { adminUserNewRoute } from "./routes/admin/user/new.js"
 import { adminUserUpdateRoute } from "./routes/admin/user/update.js"
 import { adminUserFindRoute } from "./routes/admin/user/find.js"
 import { adminUserRemoveRoute } from "./routes/admin/user/remove.js"
+import { contentNewRoute } from "./routes/content/new.js"
 /*
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,6 +41,7 @@ app.put("/admin/user", (req, res, next) => authenticateMiddleware(req, res, next
 app.get("/admin/user", (req, res, next) => authenticateMiddleware(req, res, next, true), adminUserFindRoute)
 app.get("/admin/user/:id", (req, res, next) => authenticateMiddleware(req, res, next, true), adminUserFindRoute)
 app.delete("/admin/user/:id", (req, res, next) => authenticateMiddleware(req, res, next, true), adminUserRemoveRoute)
+app.post("/content/", (req, res, next) => authenticateMiddleware(req, res, next, false), contentNewRoute)
 
 const user = process.env.DB_USER
 const pass = process.env.DB_USER_PWD
@@ -50,15 +52,28 @@ connectDb(user, pass, host).then(() => {
 })
 
 function authenticateMiddleware(req, res, next, admin) {
-  const { session } = req.cookies
-  const jwt = jwtHelper.verify(session)
-  if (jwt && jwt.data && jwt.data.user) {
-    res.locals.user = jwt.data.user
+  const { authorization } = req.headers
+  let session
+  if (!authorization) {
+    session = req.cookies.session
+  } else {
+    session = authorization.split("Bearer ").join("")
   }
-  if (admin === true) {
-    if (res.locals.user.role != "admin") {
-      return res.status(403).json({ success: false, error: { code: "FORBIDDEN", message: "Only admins can perform this action" } })
+  validateJwt(session, res)
+  next()
+
+  function validateJwt(session, res) {
+    const jwt = jwtHelper.verify(session)
+    if (jwt && jwt.data && jwt.data.user) {
+      res.locals.user = jwt.data.user
+    }
+    if (admin === true) {
+      if (res.locals.user.role != "admin") {
+        return res.status(403).json({ success: false, error: { code: "FORBIDDEN", message: "Only admins can perform this action" } })
+      }
+    }
+    if (!jwt) {
+      return res.status(401).json({ success: false, error: { code: "UNAUTHORIZED", message: "Only authenticated users can perform this action" } })
     }
   }
-  next()
 }

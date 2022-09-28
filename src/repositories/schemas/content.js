@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb"
 import mongoose from "mongoose"
 const { Schema, model } = mongoose
 
@@ -32,6 +33,10 @@ const ContentSchema = new Schema(
       type: Number,
       required: true,
       default: 0
+    },
+    user: {
+      type: ObjectId,
+      required: true,
     }
   },
   { timestamps: true }

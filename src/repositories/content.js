@@ -3,8 +3,8 @@ export function buildContentRepository({ Content }) {
     insert,
   })
 
-  async function insert({ name, description, ingredients, price, image }) {
-    const inserted = await Content.create({ name, description, ingredients, price, image })
+  async function insert({ name, description, ingredients, price, image, user }) {
+    const inserted = await Content.create({ name, description, ingredients, price, image, user })
     return inserted
   }
 }

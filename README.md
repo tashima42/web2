@@ -4,6 +4,8 @@
 Importe a collection do postman utilizando o arquivo `Pizza.postman_collection.json`    
 Essa collection possui exemplos de requests e responses, e já tem um token de autorização configurado para facilitar as requests.
 
+**obs**: O envio de imagens pode ser feito usando base64 encoding, porém o tamanho do arquivo é limitado a ~70kb
+
 ## Usuario de teste
 username: admin@example.com    
 password: secret1

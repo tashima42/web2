@@ -38,6 +38,5 @@ export const contentNewSchema = Joi.object().keys({
   image: Joi
     .string()
     .min(10)
-    .max(1000)
     .required(),
 })

@@ -1,3 +1,4 @@
+import Joi from "joi"
 import { userRepository } from "../../repositories/index.js"
 import { cryptoHelper, jwtHelper } from "../../helpers/index.js"
 
@@ -15,7 +16,6 @@ export async function authLoginRoute(req, res) {
     return res.status(401).json({ success: false, error: { code: "LOGIN-INVALID-PASSWORD", message: "Invalid password"}})
   }
 
-  delete user.password
   const jwt = jwtHelper.sign({ user })
   res.cookie("session", jwt, { httpOnly: true, expires: new Date(Date.now() + (60 * 60 * 24)) })
   return res.status(200).json({ success: true, user })
@@ -24,3 +24,17 @@ export async function authLoginRoute(req, res) {
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error}})
   }
 }
+
+export const authLoginSchema = Joi.object().keys({
+  email: Joi
+    .string()
+    .email()
+    .required(),
+  password: Joi
+    .string()
+    .min(5)
+    .max(140)
+    .regex(/[a-z]/, 'lower-case')
+    .regex(/[0-9]/, 'number')
+    .required(),
+})

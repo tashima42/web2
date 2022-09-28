@@ -1,3 +1,4 @@
+import Joi from "joi"
 import { contentRepository } from "../../../repositories/index.js"
 
 export async function contentCommentNewRoute(req, res) {
@@ -13,3 +14,10 @@ export async function contentCommentNewRoute(req, res) {
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error } })
   }
 }
+export const contentCommentNewSchema = Joi.object().keys({
+  comment: Joi
+    .string()
+    .min(2)
+    .max(1000)
+    .required(),
+})

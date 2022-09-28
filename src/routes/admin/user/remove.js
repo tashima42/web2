@@ -1,3 +1,4 @@
+import Joi from "joi"
 import { userRepository } from "../../../repositories/index.js"
 
 export async function adminUserRemoveRoute(req, res) {
@@ -17,3 +18,11 @@ export async function adminUserRemoveRoute(req, res) {
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error } })
   }
 }
+
+export const adminUserRemoveSchema = Joi.object().keys({
+  id: Joi
+    .string()
+    .max(140)
+    .min(10)
+    .required(),
+})

@@ -1,3 +1,4 @@
+import Joi from "joi"
 import { contentRepository } from "../../repositories/index.js"
 
 export async function contentFilterRoute(req, res) {
@@ -12,3 +13,13 @@ export async function contentFilterRoute(req, res) {
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error } })
   }
 }
+
+export const contentFilterSchema = Joi.object().keys({
+  ingredient: Joi
+    .string()
+    .max(1000)
+    .min(1),
+  price: Joi
+    .number()
+    .min(0),
+})

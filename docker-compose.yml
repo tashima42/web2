@@ -12,6 +12,18 @@ services:
     volumes:
       - mongo:/data/db
       - mongo_config:/data/configdb
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 3895:3895
+    environment:
+      # Use this to connect to the Docker MongoDB container
+      - DB_USER=root
+      - DB_USER_PWD=password
+      - DB_HOST=mongo:27017
+      - PORT=3895
 volumes:
   mongo:
   mongo_config:

@@ -19,6 +19,7 @@ import { adminUserUpdateRoute } from "./routes/admin/user/update.js"
 import { adminUserFindRoute } from "./routes/admin/user/find.js"
 import { adminUserRemoveRoute } from "./routes/admin/user/remove.js"
 import { contentNewRoute } from "./routes/content/new.js"
+import { contentFilterRoute } from "./routes/content/filter.js"
 /*
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -42,6 +43,7 @@ app.get("/admin/user", (req, res, next) => authenticateMiddleware(req, res, next
 app.get("/admin/user/:id", (req, res, next) => authenticateMiddleware(req, res, next, true), adminUserFindRoute)
 app.delete("/admin/user/:id", (req, res, next) => authenticateMiddleware(req, res, next, true), adminUserRemoveRoute)
 app.post("/content/", (req, res, next) => authenticateMiddleware(req, res, next, false), contentNewRoute)
+app.get("/content", contentFilterRoute)
 
 const user = process.env.DB_USER
 const pass = process.env.DB_USER_PWD

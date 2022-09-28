@@ -13,11 +13,12 @@ const ContentSchema = new Schema(
       required: true
     },
     ingredients: {
-      type: String,
-      required: true
+      type: [String],
+      required: true,
+      default: [],
     },
     price: {
-      type: String,
+      type: Number,
       required: true
     },
     image: {

@@ -1,5 +1,7 @@
 # web2
 
+## Postman Collection
+Importe a collection do postman utilizando o arquivo `Pizza.postman_collction.json`
 ## Rodando o repositorio
 
 ### Com docker

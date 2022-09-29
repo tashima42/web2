@@ -4,7 +4,7 @@ export function authenticateMiddlewareAdmin(req, res, next) {
   return authenticateMiddleware(req, res, next, true)
 }
 export function authenticateMiddlewareAny(req, res, next) {
-  return authenticateMiddleware(req, res, next, true)
+  return authenticateMiddleware(req, res, next, false)
 }
 
 function authenticateMiddleware(req, res, next, admin) {

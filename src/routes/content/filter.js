@@ -9,10 +9,7 @@ export async function contentFilterRoute(req, res) {
 
     const sortedContents = sortByLikeDislikeRatio(content)
 
-    // FIXME - remove map
-    return res.status(200).json({ success: true, content: sortedContents.map(a => ({ ...a, image: undefined })) })
-
-
+    return res.status(200).json({ success: true, content: sortedContents })
   } catch (error) {
     console.error(error)
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error } })

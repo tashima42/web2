@@ -4,6 +4,8 @@ export function buildContentRepository({ Content }) {
     filter,
     addComment,
     addLike,
+    addDislike,
+    getMostLiked,
   })
 
   async function insert({ name, description, ingredients, price, image, user }) {
@@ -18,7 +20,7 @@ export function buildContentRepository({ Content }) {
     if (maxPrice) {
       query.price = { $lt: maxPrice }
     }
-    const found = await Content.find(query)
+    const found = await Content.find(query).lean()
     return found ? found : null
   }
 
@@ -29,5 +31,13 @@ export function buildContentRepository({ Content }) {
   async function addLike({ id }) {
     const updated = await Content.updateOne({ _id: id }, { $inc: { likes: 1 } })
     return updated
+  }
+  async function addDislike({ id }) {
+    const updated = await Content.updateOne({ _id: id }, { $inc: { dislikes: 1 } })
+    return updated
+  }
+  async function getMostLiked() {
+    const content = await Content.find().sort({ likes: -1 }).lean()
+    return content[0]
   }
 }

@@ -16,7 +16,9 @@ import { adminUserRemoveRoute, adminUserRemoveSchema } from "./routes/admin/user
 import { contentNewRoute, contentNewSchema } from "./routes/content/new.js"
 import { contentFilterRoute, contentFilterSchema } from "./routes/content/filter.js"
 import { contentCommentNewRoute, contentCommentNewSchema } from "./routes/content/comment/new.js"
-import { contentLikeNewRoute, contentLikeNewSchema } from "./routes/content/like/new.js"
+import { contentLikeRoute, contentLikeSchema } from "./routes/content/like.js"
+import { contentDislikeRoute, contentDislikeSchema } from "./routes/content/dislike.js"
+import { contentOrderLikesRoute } from "./routes/content/order/likes.js"
 import { userUpdateRoute, userUpdateSchema } from "./routes/user/update.js"
 
 const app = express()
@@ -63,17 +65,23 @@ app.post("/content/",
   contentNewRoute
 )
 app.get("/content",
-  contentFilterRoute
+  joiMiddleware(contentFilterSchema, "body"),
+  contentFilterRoute,
 )
 app.post("/content/:id/comment",
-  joiMiddleware(contentLikeNewSchema, "params"),
+  joiMiddleware(contentCommentNewSchema, "params"),
   joiMiddleware(contentCommentNewSchema, "body"),
   contentCommentNewRoute
 )
 app.post("/content/:id/like",
-  joiMiddleware(contentLikeNewSchema, "params"),
-  contentLikeNewRoute
+  joiMiddleware(contentLikeSchema, "params"),
+  contentLikeRoute
 )
+app.post("/content/:id/dislike",
+  joiMiddleware(contentDislikeSchema, "params"),
+  contentDislikeRoute
+)
+app.get("/content/order/likes", contentOrderLikesRoute)
 app.put("/user/",
   authenticateMiddlewareAny,
   joiMiddleware(userUpdateSchema, "body"),

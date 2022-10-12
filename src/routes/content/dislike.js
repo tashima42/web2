@@ -1,11 +1,11 @@
 import Joi from "joi"
-import { contentRepository } from "../../../repositories/index.js"
+import { contentRepository } from "../../repositories/index.js"
 
-export async function contentLikeNewRoute(req, res) {
+export async function contentDislikeRoute(req, res) {
   try {
     const { id } = req.params
 
-    await contentRepository.addLike({ id })
+    await contentRepository.addDislike({ id })
 
     return res.status(200).json({ success: true })
   } catch (error) {
@@ -14,7 +14,7 @@ export async function contentLikeNewRoute(req, res) {
   }
 }
 
-export const contentLikeNewSchema = Joi.object().keys({
+export const contentDislikeSchema = Joi.object().keys({
   id: Joi
     .string()
     .max(140)

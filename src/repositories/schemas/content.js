@@ -35,6 +35,11 @@ const ContentSchema = new Schema(
       required: true,
       default: 0
     },
+    dislikes: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     user: {
       type: ObjectId,
       required: true,

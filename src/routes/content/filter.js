@@ -7,10 +7,24 @@ export async function contentFilterRoute(req, res) {
 
     const content = await contentRepository.filter({ ingredient, maxPrice })
 
-    return res.status(200).json({ success: true, content })
+    const sortedContents = sortByLikeDislikeRatio(content)
+
+    // FIXME - remove map
+    return res.status(200).json({ success: true, content: sortedContents.map(a => ({ ...a, image: undefined })) })
+
+
   } catch (error) {
     console.error(error)
     return res.status(500).json({ success: false, error: { code: "INTERNAL-SERVER-ERROR", message: error } })
+  }
+}
+
+function sortByLikeDislikeRatio(contents) {
+  contents.sort((a, b) => calcRatio(b) - calcRatio(a))
+  return contents
+
+  function calcRatio({ likes, dislikes }) {
+    return likes - dislikes
   }
 }
 
@@ -19,7 +33,7 @@ export const contentFilterSchema = Joi.object().keys({
     .string()
     .max(1000)
     .min(1),
-  price: Joi
+  maxPrice: Joi
     .number()
     .min(0),
 })
